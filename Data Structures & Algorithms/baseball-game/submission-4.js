@@ -1,0 +1,28 @@
+class Solution {
+    /**
+     * @param {string[]} operations
+     * @return {number}
+     */
+    calPoints(operations) {
+        let score = 0;
+        let record = [];
+        
+        for(let i =0; i< operations.length; i++){
+            const op = operations[i];
+            if(!["+", "C", "D"].includes(op)){
+                record.push(parseInt(op))
+            } else if(op == "+"){
+                record.push(record[record.length-1]+record[record.length-2]);
+            } else if(op == "C"){
+                record.pop();
+            } else if(op == "D"){
+                const lastVal = record[record.length-1];
+                record.push(2*lastVal)
+            }
+        }
+        for(let j =0; j< record.length; j++){
+            score+= record[j]
+        }
+        return score;
+    }
+}
